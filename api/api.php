@@ -1,33 +1,56 @@
 <?php
-
 class api extends apiBaseClass {
 
-    //---GET---
-    function printTestMessage() {
-        $retJSON = $this->createDefaultJson();          
-        $retJSON->message = "Test message";
-        return $retJSON;
-    }
+	//---GET---
+	function printTestMessage() {
+		$retJSON = $this->createDefaultJson();  
+		$retJSON->message = "Test message";
+		return $retJSON;
+	}
 
-    function getUsers() {
-        $retJSON = $this->createDefaultJson();          
-        $query = "SELECT * FROM users";           
-        $retJSON = $this->dbExecutor($query);
-        return $retJSON;
-    }
+	function getUsers() {
+		$retJSON = $this->createDefaultJson();          
+		$query = "SELECT * FROM users";           
+		$retJSON = $this->dbExecutor($query);
+		return $retJSON;
+	}
 
-    function getLikeUserWithID($apiMethodParams) {
-        $retJSON = $this->createDefaultJson();  
-        if (isset($apiMethodParams->userID)){
-            $query = "SELECT likeUsers.choiceID FROM users, likeUsers WHERE users.id = $apiMethodParams->userID and users.id = likeUsers.userID";           
-            $retJSON = $this->dbExecutor($query);
-        }
-        else {
-            $retJSON->error=  APIConstants::ERROR_PARAMS;
-        }
-        return $retJSON;
-    }
+	function getLikeUserWithID($apiMethodParams) {
+		$retJSON = $this->createDefaultJson();  
+		if (isset($apiMethodParams->userID)){
+		$query = "SELECT likeUsers.choiceID FROM users, likeUsers WHERE users.id = $apiMethodParams->userID and users.id = likeUsers.userID";           
+		$retJSON = $this->dbExecutor($query);
+		}
+		else {
+			$retJSON->error=  APIConstants::ERROR_PARAMS;
+		}
+		return $retJSON;
+	}
 
-    //--POST--
+	function getUserVkById($apiMethodParams) {
+		$retJSON = $this->createDefaultJson();  
+		if (isset($apiMethodParams->userID)){         
+			$query = "SELECT idVK FROM users WHERE id = $apiMethodParams->userID";           
+			$retJSON = $this->dbExecutor($query);
+		}
+		else {
+			$retJSON->error=  APIConstants::ERROR_PARAMS;
+		}
+		return $retJSON;
+	}
 
+	function getUserIDByVKId($apiMethodParams) {
+		$retJSON = $this->createDefaultJson();  
+		if (isset($apiMethodParams->userVK)){         
+			$query = "SELECT id FROM users WHERE idVK = $apiMethodParams->userVK";           
+			$retJSON = $this->dbExecutor($query);
+		}
+		else {
+			$retJSON->error=  APIConstants::ERROR_PARAMS;
+		}
+		return $retJSON;
+	}
+
+	//--POST--
+}
 ?>
