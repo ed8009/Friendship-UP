@@ -7,5 +7,7 @@ echo '<p>4. http://travel-app.ru/api/?api.getUserVkById={"userVK":"user_id_vk"} 
 echo '<p>5. http://travel-app.ru/api/?api.getUserIDByVKId={"userVK":"user_id_vk"} - </p>';
 echo '<p>6. http://travel-app.ru/api/?api.saveUserTokenById={"idVK":"user_id_vk","token":"token_value"} - Сохранение/обновление токена</p>';
 echo '<p>7. http://travel-app.ru/api/?api.getTokenByUserIdVK={"idVK":"user_id_vk"} - получить токен по id vk</p>';
+echo '<p>8. http://travel-app.ru/api/?api.createUserWithIdVk={"idVK":"user_id_vk","token":"token_value"} - создать пользователя</p>';
+
 
 ?>

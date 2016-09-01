@@ -75,6 +75,27 @@ class api extends apiBaseClass {
 		return $retJSON;
 	}
 
+	function createUserWithIdVk($apiMethodParams) {
+		$retJSON = $this->createDefaultJson();  
+		if (isset($apiMethodParams->idVK) && isset($apiMethodParams->token)){ 
+
+			$queryCountUser = "SELECT id FROM users WHERE idVK = $apiMethodParams->idVK";
+			$result = $this->dbExecutor($queryCountUser);
+
+			if (count($result) == 0) {
+				$query = "INSERT INTO users (idVK,token) VALUES ('$apiMethodParams->idVK','$apiMethodParams->token')"; 
+				$retJSON = $this->dbWriter($query);
+    		}
+    		else {
+    			$retJSON->error = APIConstants::ERROR_INTERNAL_SERVER;
+    		}	
+		}
+		else {
+			$retJSON->error = APIConstants::ERROR_PARAMS;
+		}
+		return $retJSON;
+	}
+
 	function getTokenByUserIdVK($apiMethodParams) {
 		$retJSON = $this->createDefaultJson();  
 		if (isset($apiMethodParams->idVK)){         
