@@ -29,6 +29,9 @@ class APIConstants {
     
     //Ошибка zip архива
     const ERROR_ENSO_ZIP_ARCHIVE = 1001;
+
+    //Такие данные уже есть
+    const ERROR_INTERNAL_SERVER = 500;
     
 }
 ?>
